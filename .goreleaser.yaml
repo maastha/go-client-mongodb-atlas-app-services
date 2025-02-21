@@ -32,27 +32,19 @@ changelog:
 # builds:
 #   - skip: true
 
-# checksum:
-#   name_template: "{{ .ProjectName }}_{{ .Version }}_SHA256SUMS"
-#   algorithm: sha256
+checksum:
+  name_template: "{{ .ProjectName }}_{{ .Version }}_SHA256SUMS"
+  algorithm: sha256
 
-# signs:
-#   - artifacts: checksum
-#     args:
-#       - "--batch"
-#       - "--local-user"
-#       - "{{ .Env.GPG_FINGERPRINT }}"
-#       - "--output"
-#       - "${signature}"
-#       - "--detach-sign"
-#       - "${artifact}"
+signs:
+  - artifacts: checksum
+    args:
+      - "--batch"
+      - "--local-user"
+      - "{{ .Env.GPG_FINGERPRINT }}"
+      - "--output"
+      - "${signature}"
+      - "--detach-sign"
+      - "${artifact}"
 
-# changelog:
-#   sort: asc
-#   filters:
-#     exclude:
-#       - "^docs:"
-#       - "^test:"
 
-# release:
-#   name_template: "v{{.Version}}"
