@@ -35,7 +35,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
-          ref: ${{ inputs.use_existing_tag == 'true' && inputs.version_number || 'master' }
+          ref: ${{ inputs.use_existing_tag == 'true' && inputs.version_number || 'master' }}
 
   create-tag:
     runs-on: ubuntu-latest
