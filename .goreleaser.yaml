@@ -13,10 +13,25 @@ before:
     # You may remove this if you don't use go modules.
     - go mod tidy
     # you may remove this if you don't need go generate
-    - go generate ./...
+    # - go generate ./...
 
 builds:
-- skip: true
+  - skip: true
+
+checksum:
+  name_template: "{{ .ProjectName }}_{{ .Version }}_SHA256SUMS"
+  algorithm: sha256
+
+# signs:
+#   - artifacts: checksum
+#     args:
+#       - "--batch"
+#       - "--local-user"
+#       - "{{ .Env.GPG_FINGERPRINT }}" # set this environment variable for your signing key
+#       - "--output"
+#       - "${signature}"
+#       - "--detach-sign"
+#       - "${artifact}"
 
 changelog:
   sort: asc
@@ -26,8 +41,4 @@ changelog:
       - "^test:"
 
 release:
-  footer: >-
-
-    ---
-
-    Released by [GoReleaser](https://github.com/goreleaser/goreleaser).
+  name_template: "v{{.Version}}"
